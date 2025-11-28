@@ -71,8 +71,22 @@ class AuctionCubit extends Cubit<AuctionState> {
     emit(AuctionInitial());
   }
 
-  void placeBid(double amount, String token) {
-    placeBidUseCase(PlaceBidParams(amount: amount, token: token));
+  void bidAmountChanged(String amountStr) {
+    if (state is AuctionLoaded) {
+      final amount = double.tryParse(amountStr) ?? 0.0;
+      emit((state as AuctionLoaded).copyWith(bidAmount: amount));
+    }
+  }
+
+  void placeBid(String token) {
+    if (state is AuctionLoaded) {
+      final amount = (state as AuctionLoaded).bidAmount;
+      if (amount > 0) {
+        placeBidUseCase(PlaceBidParams(amount: amount, token: token));
+        // Reset bid amount after placing bid
+        emit((state as AuctionLoaded).copyWith(bidAmount: 0.0));
+      }
+    }
   }
 
   @override

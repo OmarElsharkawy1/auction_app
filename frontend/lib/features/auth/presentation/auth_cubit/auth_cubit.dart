@@ -94,9 +94,18 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> checkAuth() async {
     emit(const AuthLoading());
     try {
-      // Check auth logic here
-      // If failed:
-      emit(const AuthUnauthenticated());
+      final user = await checkAuthUseCase(NoParams());
+      if (user != null) {
+        emit(
+          AuthAuthenticated(
+            token: user.token,
+            username: user.username,
+            formData: state.formData,
+          ),
+        );
+      } else {
+        emit(const AuthUnauthenticated());
+      }
     } catch (e) {
       emit(const AuthUnauthenticated());
     }

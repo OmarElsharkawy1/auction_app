@@ -4,6 +4,7 @@ import 'package:frontend/core/components/snackbar.dart';
 import 'package:frontend/features/auction/presentatiom/auction_cubit/auction_cubit.dart';
 import 'package:frontend/features/auth/presentation/auth_cubit/auth_cubit.dart';
 import 'package:frontend/features/auth/presentation/auth_cubit/auth_state.dart';
+import 'package:go_router/go_router.dart';
 
 class AuthScreen extends StatelessWidget {
   const AuthScreen({super.key});
@@ -55,6 +56,7 @@ class AuthScreen extends StatelessWidget {
                 AppSnackBar.showError(context, state.message);
               } else if (state is AuthAuthenticated) {
                 context.read<AuctionCubit>().connect(state.token);
+                context.go('/auction');
               }
             },
           ),

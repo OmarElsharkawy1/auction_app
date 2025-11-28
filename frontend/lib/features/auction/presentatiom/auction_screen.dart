@@ -4,29 +4,24 @@ import 'package:frontend/features/auction/presentatiom/auction_cubit/auction_cub
 import 'package:frontend/features/auction/presentatiom/auction_cubit/auction_state.dart';
 import 'package:frontend/features/auth/presentation/auth_cubit/auth_cubit.dart';
 import 'package:frontend/features/auth/presentation/auth_cubit/auth_state.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
-class AuctionScreen extends StatefulWidget {
+class AuctionScreen extends StatelessWidget {
   const AuctionScreen({super.key});
-
-  @override
-  _AuctionScreenState createState() => _AuctionScreenState();
-}
-
-class _AuctionScreenState extends State<AuctionScreen> {
-  final _bidController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Live Auction'),
+        title: const Text('Live Auction'),
         actions: [
           IconButton(
-            icon: Icon(Icons.logout),
+            icon: const Icon(Icons.logout),
             onPressed: () {
               context.read<AuctionCubit>().disconnect();
               context.read<AuthCubit>().logout();
+              context.go('/');
             },
           ),
         ],
@@ -34,7 +29,7 @@ class _AuctionScreenState extends State<AuctionScreen> {
       body: BlocBuilder<AuctionCubit, AuctionState>(
         builder: (context, state) {
           if (state is AuctionLoading || state is AuctionInitial) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           }
 
           if (state is AuctionError) {
@@ -60,11 +55,11 @@ class _AuctionScreenState extends State<AuctionScreen> {
                           errorBuilder: (c, e, s) => Container(
                             height: 250,
                             color: Colors.grey[300],
-                            child: Icon(Icons.image, size: 50),
+                            child: const Icon(Icons.image, size: 50),
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.all(16),
+                          padding: const EdgeInsets.all(16),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -74,9 +69,9 @@ class _AuctionScreenState extends State<AuctionScreen> {
                                   context,
                                 ).textTheme.headlineMedium,
                               ),
-                              SizedBox(height: 8),
+                              const SizedBox(height: 8),
                               Text(item['description']),
-                              SizedBox(height: 20),
+                              const SizedBox(height: 20),
                               Text(
                                 'Current Price: ${currency.format(item['currentPrice'])}',
                                 style: Theme.of(context).textTheme.headlineSmall
@@ -92,9 +87,9 @@ class _AuctionScreenState extends State<AuctionScreen> {
                             ],
                           ),
                         ),
-                        Divider(),
+                        const Divider(),
                         Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 16),
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
                           child: Text(
                             'Recent Bids',
                             style: Theme.of(context).textTheme.titleLarge,
@@ -102,16 +97,18 @@ class _AuctionScreenState extends State<AuctionScreen> {
                         ),
                         ListView.builder(
                           shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
+                          physics: const NeverScrollableScrollPhysics(),
                           itemCount: bids.length,
                           itemBuilder: (ctx, i) {
                             final bid = bids[i];
                             return ListTile(
-                              leading: Icon(Icons.gavel),
+                              leading: const Icon(Icons.gavel),
                               title: Text('${bid['user']}'),
                               trailing: Text(
                                 currency.format(bid['amount']),
-                                style: TextStyle(fontWeight: FontWeight.bold),
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                               subtitle: Text(
                                 DateFormat(
@@ -126,12 +123,18 @@ class _AuctionScreenState extends State<AuctionScreen> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 24,
+                  ),
                   child: Row(
                     children: [
                       Expanded(
-                        child: TextField(
-                          controller: _bidController,
+                        child: TextFormField(
+                          // We use a key to force rebuild if we want to clear it,
+                          // but simpler is to just let it be.
+                          // If we want to clear it, we can use a key that changes on successful bid.
+                          // For now, standard stateless input.
                           keyboardType: TextInputType.number,
                           decoration: InputDecoration(
                             labelText: 'Your Bid',
@@ -140,30 +143,28 @@ class _AuctionScreenState extends State<AuctionScreen> {
                             ),
                             prefixText: '\$',
                           ),
+                          onChanged: (value) => context
+                              .read<AuctionCubit>()
+                              .bidAmountChanged(value),
                         ),
                       ),
-                      SizedBox(width: 16),
+                      const SizedBox(width: 16),
                       ElevatedButton(
                         onPressed: () {
-                          final amount = double.tryParse(_bidController.text);
-                          if (amount != null) {
-                            final authState = context.read<AuthCubit>().state;
-                            if (authState is AuthAuthenticated) {
-                              context.read<AuctionCubit>().placeBid(
-                                amount,
-                                authState.token,
-                              );
-                              _bidController.clear();
-                            }
+                          final authState = context.read<AuthCubit>().state;
+                          if (authState is AuthAuthenticated) {
+                            context.read<AuctionCubit>().placeBid(
+                              authState.token,
+                            );
                           }
                         },
                         style: ElevatedButton.styleFrom(
-                          padding: EdgeInsets.symmetric(
+                          padding: const EdgeInsets.symmetric(
                             horizontal: 32,
                             vertical: 16,
                           ),
                         ),
-                        child: Text('BID'),
+                        child: const Text('BID'),
                       ),
                     ],
                   ),

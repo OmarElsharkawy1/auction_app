@@ -13,11 +13,19 @@ class AuctionLoading extends AuctionState {}
 
 class AuctionLoaded extends AuctionState {
   final Map<String, dynamic> item;
+  final double bidAmount;
 
-  const AuctionLoaded(this.item);
+  const AuctionLoaded(this.item, {this.bidAmount = 0.0});
+
+  AuctionLoaded copyWith({Map<String, dynamic>? item, double? bidAmount}) {
+    return AuctionLoaded(
+      item ?? this.item,
+      bidAmount: bidAmount ?? this.bidAmount,
+    );
+  }
 
   @override
-  List<Object?> get props => [item];
+  List<Object?> get props => [item, bidAmount];
 }
 
 class AuctionError extends AuctionState {
