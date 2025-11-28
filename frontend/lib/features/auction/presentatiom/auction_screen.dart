@@ -15,14 +15,37 @@ class AuctionScreen extends StatefulWidget {
 }
 
 class _AuctionScreenState extends State<AuctionScreen> {
+  late ScrollController _scrollController;
+  bool _isCollapsed = false;
+
   @override
   void initState() {
     super.initState();
+    _scrollController = ScrollController();
+    _scrollController.addListener(_scrollListener);
+
     // Connect to auction when screen initializes
     final authState = context.read<AuthCubit>().state;
     if (authState is AuthAuthenticated) {
       context.read<AuctionCubit>().connect(authState.token);
     }
+  }
+
+  void _scrollListener() {
+    if (!_scrollController.hasClients) return;
+
+    final isCollapsed = _scrollController.offset > (250 - kToolbarHeight);
+    if (isCollapsed != _isCollapsed) {
+      setState(() {
+        _isCollapsed = isCollapsed;
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
   }
 
   @override
@@ -47,22 +70,28 @@ class _AuctionScreenState extends State<AuctionScreen> {
               children: [
                 Expanded(
                   child: CustomScrollView(
+                    controller: _scrollController,
                     slivers: [
                       SliverAppBar(
                         expandedHeight: 300,
                         pinned: true,
+                        iconTheme: IconThemeData(
+                          color: _isCollapsed ? Colors.black : Colors.white,
+                        ),
                         flexibleSpace: FlexibleSpaceBar(
                           title: Text(
                             item['title'],
-                            style: const TextStyle(
-                              color: Colors.white,
-                              shadows: [
-                                Shadow(
-                                  blurRadius: 10.0,
-                                  color: Colors.black45,
-                                  offset: Offset(2.0, 2.0),
-                                ),
-                              ],
+                            style: TextStyle(
+                              color: _isCollapsed ? Colors.black : Colors.white,
+                              shadows: _isCollapsed
+                                  ? null
+                                  : const [
+                                      Shadow(
+                                        blurRadius: 10.0,
+                                        color: Colors.black45,
+                                        offset: Offset(2.0, 2.0),
+                                      ),
+                                    ],
                             ),
                           ),
                           background: Stack(
@@ -93,7 +122,10 @@ class _AuctionScreenState extends State<AuctionScreen> {
                         ),
                         actions: [
                           IconButton(
-                            icon: const Icon(Icons.logout, color: Colors.white),
+                            icon: Icon(
+                              Icons.logout,
+                              color: _isCollapsed ? Colors.black : Colors.white,
+                            ),
                             onPressed: () {
                               context.read<AuctionCubit>().disconnect();
                               context.read<AuthCubit>().logout();
