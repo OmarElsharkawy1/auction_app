@@ -54,7 +54,13 @@ class AuctionCubit extends Cubit<AuctionState> {
                 )
                 .toList(),
           };
-          emit(AuctionLoaded(itemMap));
+
+          double currentBidAmount = 0.0;
+          if (state is AuctionLoaded) {
+            currentBidAmount = (state as AuctionLoaded).bidAmount;
+          }
+
+          emit(AuctionLoaded(itemMap, bidAmount: currentBidAmount));
         },
         onError: (error) {
           emit(AuctionError('Connection error: $error'));

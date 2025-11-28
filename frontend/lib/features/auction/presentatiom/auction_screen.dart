@@ -7,25 +7,27 @@ import 'package:frontend/features/auth/presentation/auth_cubit/auth_state.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
-class AuctionScreen extends StatelessWidget {
+class AuctionScreen extends StatefulWidget {
   const AuctionScreen({super.key});
+
+  @override
+  State<AuctionScreen> createState() => _AuctionScreenState();
+}
+
+class _AuctionScreenState extends State<AuctionScreen> {
+  @override
+  void initState() {
+    super.initState();
+    // Connect to auction when screen initializes
+    final authState = context.read<AuthCubit>().state;
+    if (authState is AuthAuthenticated) {
+      context.read<AuctionCubit>().connect(authState.token);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Live Auction'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.logout),
-            onPressed: () {
-              context.read<AuctionCubit>().disconnect();
-              context.read<AuthCubit>().logout();
-              context.go('/');
-            },
-          ),
-        ],
-      ),
       body: BlocBuilder<AuctionCubit, AuctionState>(
         builder: (context, state) {
           if (state is AuctionLoading || state is AuctionInitial) {
@@ -44,104 +46,227 @@ class AuctionScreen extends StatelessWidget {
             return Column(
               children: [
                 Expanded(
-                  child: SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Image.network(
-                          item['imageUrl'],
-                          height: 250,
-                          fit: BoxFit.cover,
-                          errorBuilder: (c, e, s) => Container(
-                            height: 250,
-                            color: Colors.grey[300],
-                            child: const Icon(Icons.image, size: 50),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(16),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                item['title'],
-                                style: Theme.of(
-                                  context,
-                                ).textTheme.headlineMedium,
-                              ),
-                              const SizedBox(height: 8),
-                              Text(item['description']),
-                              const SizedBox(height: 20),
-                              Text(
-                                'Current Price: ${currency.format(item['currentPrice'])}',
-                                style: Theme.of(context).textTheme.headlineSmall
-                                    ?.copyWith(
-                                      color: Colors.green,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                              ),
-                              if (item['highestBidder'] != null)
-                                Text(
-                                  'Highest Bidder: ${item['highestBidder']}',
+                  child: CustomScrollView(
+                    slivers: [
+                      SliverAppBar(
+                        expandedHeight: 300,
+                        pinned: true,
+                        flexibleSpace: FlexibleSpaceBar(
+                          title: Text(
+                            item['title'],
+                            style: const TextStyle(
+                              color: Colors.white,
+                              shadows: [
+                                Shadow(
+                                  blurRadius: 10.0,
+                                  color: Colors.black45,
+                                  offset: Offset(2.0, 2.0),
                                 ),
+                              ],
+                            ),
+                          ),
+                          background: Stack(
+                            fit: StackFit.expand,
+                            children: [
+                              Image.network(
+                                item['imageUrl'],
+                                fit: BoxFit.cover,
+                                errorBuilder: (c, e, s) => Container(
+                                  color: Colors.grey[300],
+                                  child: const Icon(Icons.image, size: 50),
+                                ),
+                              ),
+                              const DecoratedBox(
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                    begin: Alignment.topCenter,
+                                    end: Alignment.bottomCenter,
+                                    colors: [
+                                      Colors.transparent,
+                                      Colors.black54,
+                                    ],
+                                  ),
+                                ),
+                              ),
                             ],
                           ),
                         ),
-                        const Divider(),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16),
-                          child: Text(
-                            'Recent Bids',
-                            style: Theme.of(context).textTheme.titleLarge,
+                        actions: [
+                          IconButton(
+                            icon: const Icon(Icons.logout, color: Colors.white),
+                            onPressed: () {
+                              context.read<AuctionCubit>().disconnect();
+                              context.read<AuthCubit>().logout();
+                              context.go('/');
+                            },
+                          ),
+                        ],
+                      ),
+                      SliverToBoxAdapter(
+                        child: Padding(
+                          padding: const EdgeInsets.all(24.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    'Current Price',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleMedium
+                                        ?.copyWith(color: Colors.grey[600]),
+                                  ),
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 12,
+                                      vertical: 6,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: Colors.red.withOpacity(0.1),
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                    child: const Row(
+                                      children: [
+                                        Icon(
+                                          Icons.circle,
+                                          size: 8,
+                                          color: Colors.red,
+                                        ),
+                                        SizedBox(width: 6),
+                                        Text(
+                                          'LIVE',
+                                          style: TextStyle(
+                                            color: Colors.red,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 12,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 8),
+                              Text(
+                                currency.format(item['currentPrice']),
+                                style: Theme.of(context).textTheme.headlineLarge
+                                    ?.copyWith(
+                                      color: Theme.of(context).primaryColor,
+                                    ),
+                              ),
+                              const SizedBox(height: 24),
+                              Text(
+                                'Description',
+                                style: Theme.of(context).textTheme.titleLarge,
+                              ),
+                              const SizedBox(height: 12),
+                              Text(
+                                item['description'],
+                                style: Theme.of(context).textTheme.bodyLarge,
+                              ),
+                              const SizedBox(height: 32),
+                              Text(
+                                'Recent Bids',
+                                style: Theme.of(context).textTheme.titleLarge,
+                              ),
+                              const SizedBox(height: 16),
+                            ],
                           ),
                         ),
-                        ListView.builder(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemCount: bids.length,
-                          itemBuilder: (ctx, i) {
-                            final bid = bids[i];
-                            return ListTile(
-                              leading: const Icon(Icons.gavel),
-                              title: Text('${bid['user']}'),
-                              trailing: Text(
-                                currency.format(bid['amount']),
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
+                      ),
+                      SliverList(
+                        delegate: SliverChildBuilderDelegate((context, index) {
+                          final bid = bids[index];
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 24.0,
+                              vertical: 8.0,
+                            ),
+                            child: Card(
+                              child: ListTile(
+                                contentPadding: const EdgeInsets.symmetric(
+                                  horizontal: 20,
+                                  vertical: 8,
+                                ),
+                                leading: CircleAvatar(
+                                  backgroundColor: Theme.of(
+                                    context,
+                                  ).primaryColor.withOpacity(0.1),
+                                  child: Text(
+                                    bid['user'][0].toUpperCase(),
+                                    style: TextStyle(
+                                      color: Theme.of(context).primaryColor,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                                title: Text(
+                                  bid['user'],
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                subtitle: Text(
+                                  DateFormat(
+                                    'hh:mm a',
+                                  ).format(DateTime.parse(bid['timestamp'])),
+                                ),
+                                trailing: Text(
+                                  currency.format(bid['amount']),
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Theme.of(context).primaryColor,
+                                    fontSize: 16,
+                                  ),
                                 ),
                               ),
-                              subtitle: Text(
-                                DateFormat(
-                                  'dd-MM-yyyy hh:mm a',
-                                ).format(DateTime.parse(bid['timestamp'])),
-                              ),
-                            );
-                          },
-                        ),
-                      ],
-                    ),
+                            ),
+                          );
+                        }, childCount: bids.length),
+                      ),
+                      const SliverToBoxAdapter(
+                        child: SizedBox(height: 100),
+                      ), // Space for bottom bar
+                    ],
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 24,
+                Container(
+                  padding: const EdgeInsets.all(24),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.05),
+                        blurRadius: 20,
+                        offset: const Offset(0, -5),
+                      ),
+                    ],
                   ),
                   child: Row(
                     children: [
                       Expanded(
                         child: TextFormField(
-                          // We use a key to force rebuild if we want to clear it,
-                          // but simpler is to just let it be.
-                          // If we want to clear it, we can use a key that changes on successful bid.
-                          // For now, standard stateless input.
                           keyboardType: TextInputType.number,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                          ),
                           decoration: InputDecoration(
-                            labelText: 'Your Bid',
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(24),
+                            hintText: 'Enter amount',
+                            prefixText: '\$ ',
+                            prefixStyle: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
                             ),
-                            prefixText: '\$',
+                            filled: true,
+                            fillColor: Colors.grey[100],
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(16),
+                              borderSide: BorderSide.none,
+                            ),
                           ),
                           onChanged: (value) => context
                               .read<AuctionCubit>()
@@ -149,22 +274,24 @@ class AuctionScreen extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(width: 16),
-                      ElevatedButton(
-                        onPressed: () {
-                          final authState = context.read<AuthCubit>().state;
-                          if (authState is AuthAuthenticated) {
-                            context.read<AuctionCubit>().placeBid(
-                              authState.token,
-                            );
-                          }
-                        },
-                        style: ElevatedButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 32,
-                            vertical: 16,
+                      SizedBox(
+                        height: 56,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            final authState = context.read<AuthCubit>().state;
+                            if (authState is AuthAuthenticated) {
+                              context.read<AuctionCubit>().placeBid(
+                                authState.token,
+                              );
+                            }
+                          },
+                          style: ElevatedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16),
+                            ),
                           ),
+                          child: const Text('Place Bid'),
                         ),
-                        child: const Text('BID'),
                       ),
                     ],
                   ),

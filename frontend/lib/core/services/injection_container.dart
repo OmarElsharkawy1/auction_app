@@ -24,7 +24,7 @@ final sl = GetIt.instance;
 Future<void> init() async {
   //! Features - Auth
   // Cubit
-  sl.registerFactory(
+  sl.registerLazySingleton(
     () => AuthCubit(
       loginUseCase: sl(),
       registerUseCase: sl(),

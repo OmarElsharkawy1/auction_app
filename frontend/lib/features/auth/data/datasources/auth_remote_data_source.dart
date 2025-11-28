@@ -27,7 +27,8 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     if (response.statusCode == 200) {
       return UserModel.fromJson(json.decode(response.body));
     } else {
-      throw Exception('Invalid credentials');
+      final body = json.decode(response.body);
+      throw Exception(body['message'] ?? 'Invalid credentials');
     }
   }
 
@@ -43,8 +44,11 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       }),
     );
 
-    if (response.statusCode != 200) {
-      throw Exception('Registration failed');
+    if (response.statusCode == 200) {
+      return;
+    } else {
+      final body = json.decode(response.body);
+      throw Exception(body['message'] ?? 'Registration failed');
     }
   }
 }

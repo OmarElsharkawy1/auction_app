@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend/core/usecases/usecase.dart';
 import 'package:frontend/features/auth/domain/usecases/check_auth_usecase.dart';
@@ -42,7 +44,8 @@ class AuthCubit extends Cubit<AuthState> {
     } else if (state is AuthUnauthenticated) {
       emit(AuthUnauthenticated(formData: formData));
     } else if (state is AuthError) {
-      emit(AuthError((state as AuthError).message, formData: formData));
+      // Clear error when user types so that if they submit again with same error, it shows up
+      emit(AuthUnauthenticated(formData: formData));
     } else {
       // Default to Unauthenticated if we are in a state where form updates shouldn't happen or are weird
       // But typically we are in Initial, Unauthenticated, or Error when typing.
@@ -52,8 +55,14 @@ class AuthCubit extends Cubit<AuthState> {
 
   Future<void> submit() async {
     final formData = state.formData;
-    if (formData.email.isEmpty || formData.password.isEmpty) return;
-    if (!formData.isLogin && formData.username.isEmpty) return;
+    if (formData.email.isEmpty || formData.password.isEmpty) {
+      emit(AuthError('Please fill in all fields', formData: formData));
+      return;
+    }
+    if (!formData.isLogin && formData.username.isEmpty) {
+      emit(AuthError('Please enter a username', formData: formData));
+      return;
+    }
 
     emit(AuthLoading(formData: formData));
 
@@ -61,7 +70,7 @@ class AuthCubit extends Cubit<AuthState> {
       if (formData.isLogin) {
         final user = await loginUseCase(
           LoginParams(email: formData.email, password: formData.password),
-        );
+        ).timeout(const Duration(seconds: 10));
         emit(
           AuthAuthenticated(
             token: user.token,
@@ -76,13 +85,22 @@ class AuthCubit extends Cubit<AuthState> {
             password: formData.password,
             username: formData.username,
           ),
-        );
+        ).timeout(const Duration(seconds: 10));
         // On success register, switch to login mode? Or stay?
         // User logic was: "Registration successful! Please login." and switch to login.
         emit(AuthUnauthenticated(formData: formData.copyWith(isLogin: true)));
       }
     } catch (e) {
-      emit(AuthError(e.toString(), formData: formData));
+      if (e is TimeoutException) {
+        emit(
+          AuthError(
+            'Connection timed out. Please check your internet.',
+            formData: formData,
+          ),
+        );
+      } else {
+        emit(AuthError(e.toString(), formData: formData));
+      }
     }
   }
 
@@ -94,7 +112,9 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> checkAuth() async {
     emit(const AuthLoading());
     try {
-      final user = await checkAuthUseCase(NoParams());
+      final user = await checkAuthUseCase(
+        NoParams(),
+      ).timeout(const Duration(seconds: 5));
       if (user != null) {
         emit(
           AuthAuthenticated(

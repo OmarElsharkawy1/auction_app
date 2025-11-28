@@ -59,6 +59,6 @@ class AuctionRemoteDataSourceImpl implements AuctionRemoteDataSource {
 
   @override
   void placeBid(double amount, String token) {
-    _socket?.emit('placeBid', {'amount': amount});
+    _socket?.emit('placeBid', {'amount': amount, 'token': token});
   }
 }
