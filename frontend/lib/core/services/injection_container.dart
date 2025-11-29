@@ -1,7 +1,7 @@
 import 'package:frontend/core/bloc/locale/locale_cubit.dart';
 import 'package:frontend/features/auction/data/datasources/auction_remote_data_source.dart';
 import 'package:frontend/features/auction/data/repositories/auction_repository_impl.dart';
-import 'package:frontend/features/auction/domain/repositories/i_auction_repository.dart';
+import 'package:frontend/features/auction/domain/repositories/auction_repository.dart';
 import 'package:frontend/features/auction/domain/usecases/connect_auction_usecase.dart';
 import 'package:frontend/features/auction/domain/usecases/disconnect_auction_usecase.dart';
 import 'package:frontend/features/auction/domain/usecases/get_auction_updates_usecase.dart';
@@ -72,7 +72,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => GetAuctionUpdatesUseCase(sl()));
 
   // Repository
-  sl.registerLazySingleton<IAuctionRepository>(
+  sl.registerLazySingleton<AuctionRepository>(
     () => AuctionRepositoryImpl(remoteDataSource: sl()),
   );
 

@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:frontend/core/utils/extensions.dart';
 import 'package:intl/intl.dart';
 
+import '../../domain/entities/auction_item.dart';
+
 class AuctionInfo extends StatelessWidget {
-  final Map<String, dynamic> item;
+  final AuctionItem item;
 
   const AuctionInfo({super.key, required this.item});
 
@@ -54,7 +56,7 @@ class AuctionInfo extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             Text(
-              currency.format(item['currentPrice']),
+              currency.format(item.currentPrice),
               style: Theme.of(context).textTheme.headlineLarge?.copyWith(
                 color: Theme.of(context).primaryColor,
               ),
@@ -66,7 +68,7 @@ class AuctionInfo extends StatelessWidget {
             ),
             const SizedBox(height: 12),
             Text(
-              item['description'],
+              item.description,
               style: Theme.of(context).textTheme.bodyLarge,
             ),
             const SizedBox(height: 32),

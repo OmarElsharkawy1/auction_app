@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:frontend/l10n/app_localizations.dart';
+import 'package:frontend/config/l10n/app_localizations.dart';
 
+import 'config/router/app_router.dart';
+import 'config/theme/app_theme.dart';
 import 'core/bloc/locale/locale_cubit.dart';
 import 'core/bloc/locale/locale_state.dart';
 import 'core/observers/simple_bloc_observer.dart';
-import 'core/router/app_router.dart';
 import 'core/services/injection_container.dart' as di;
-import 'core/theme/app_theme.dart';
 import 'features/auction/presentatiom/auction_cubit/auction_cubit.dart';
 import 'features/auth/presentation/auth_cubit/auth_cubit.dart';
 

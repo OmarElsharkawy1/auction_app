@@ -1,8 +1,8 @@
 import 'package:frontend/features/auction/data/datasources/auction_remote_data_source.dart';
 import 'package:frontend/features/auction/domain/entities/auction_item.dart';
-import 'package:frontend/features/auction/domain/repositories/i_auction_repository.dart';
+import 'package:frontend/features/auction/domain/repositories/auction_repository.dart';
 
-class AuctionRepositoryImpl implements IAuctionRepository {
+class AuctionRepositoryImpl implements AuctionRepository {
   final AuctionRemoteDataSource remoteDataSource;
 
   AuctionRepositoryImpl({required this.remoteDataSource});

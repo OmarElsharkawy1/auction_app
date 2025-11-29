@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import '../../domain/entities/auction_item.dart';
+
 class BidList extends StatelessWidget {
-  final List<Map<String, dynamic>> bids;
+  final List<Bid> bids;
 
   const BidList({super.key, required this.bids});
 
@@ -26,7 +28,7 @@ class BidList extends StatelessWidget {
                   context,
                 ).primaryColor.withValues(alpha: 0.1),
                 child: Text(
-                  bid['user'][0].toUpperCase(),
+                  bid.user[0].toUpperCase(),
                   style: TextStyle(
                     color: Theme.of(context).primaryColor,
                     fontWeight: FontWeight.bold,
@@ -34,14 +36,12 @@ class BidList extends StatelessWidget {
                 ),
               ),
               title: Text(
-                bid['user'],
+                bid.user,
                 style: const TextStyle(fontWeight: FontWeight.bold),
               ),
-              subtitle: Text(
-                DateFormat('hh:mm a').format(DateTime.parse(bid['timestamp'])),
-              ),
+              subtitle: Text(DateFormat('hh:mm a').format(bid.timestamp)),
               trailing: Text(
-                currency.format(bid['amount']),
+                currency.format(bid.amount),
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Theme.of(context).primaryColor,

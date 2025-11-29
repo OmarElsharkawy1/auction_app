@@ -1,4 +1,4 @@
-import 'package:frontend/core/router/go_router_refresh_stream.dart';
+import 'package:frontend/config/router/go_router_refresh_stream.dart';
 import 'package:frontend/core/services/injection_container.dart' as di;
 import 'package:frontend/features/auction/presentatiom/auction_screen.dart';
 import 'package:frontend/features/auth/presentation/auth_cubit/auth_cubit.dart';

@@ -66,7 +66,7 @@ class _AuctionScreenState extends State<AuctionScreen> {
 
           if (state is AuctionLoaded) {
             final item = state.item;
-            final bids = (item['bids'] as List).cast<Map<String, dynamic>>();
+            final bids = item.bids;
 
             return Column(
               children: [

@@ -1,8 +1,8 @@
 import '../../../../core/usecases/usecase.dart';
-import '../repositories/i_auction_repository.dart';
+import '../repositories/auction_repository.dart';
 
 class DisconnectAuctionUseCase implements UseCase<void, NoParams> {
-  final IAuctionRepository repository;
+  final AuctionRepository repository;
 
   DisconnectAuctionUseCase(this.repository);
 

@@ -1,5 +1,7 @@
 import 'package:equatable/equatable.dart';
 
+import '../../domain/entities/auction_item.dart';
+
 abstract class AuctionState extends Equatable {
   const AuctionState();
 
@@ -12,12 +14,12 @@ class AuctionInitial extends AuctionState {}
 class AuctionLoading extends AuctionState {}
 
 class AuctionLoaded extends AuctionState {
-  final Map<String, dynamic> item;
+  final AuctionItem item;
   final double bidAmount;
 
   const AuctionLoaded(this.item, {this.bidAmount = 0.0});
 
-  AuctionLoaded copyWith({Map<String, dynamic>? item, double? bidAmount}) {
+  AuctionLoaded copyWith({AuctionItem? item, double? bidAmount}) {
     return AuctionLoaded(
       item ?? this.item,
       bidAmount: bidAmount ?? this.bidAmount,

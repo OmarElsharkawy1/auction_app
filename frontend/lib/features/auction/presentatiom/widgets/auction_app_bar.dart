@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/core/components/language_switcher.dart';
 
+import '../../domain/entities/auction_item.dart';
+
 class AuctionAppBar extends StatelessWidget {
   final bool isCollapsed;
-  final Map<String, dynamic> item;
+  final AuctionItem item;
   final VoidCallback onLogout;
 
   const AuctionAppBar({
@@ -23,7 +25,7 @@ class AuctionAppBar extends StatelessWidget {
       ),
       flexibleSpace: FlexibleSpaceBar(
         title: Text(
-          item['title'],
+          item.title,
           style: TextStyle(
             color: isCollapsed ? Colors.black : Colors.white,
             shadows: isCollapsed
@@ -41,7 +43,7 @@ class AuctionAppBar extends StatelessWidget {
           fit: StackFit.expand,
           children: [
             Image.network(
-              item['imageUrl'],
+              item.imageUrl,
               fit: BoxFit.cover,
               errorBuilder: (c, e, s) => Container(
                 color: Colors.grey[300],

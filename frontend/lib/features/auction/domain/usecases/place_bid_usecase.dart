@@ -1,9 +1,9 @@
 import 'package:equatable/equatable.dart';
 import 'package:frontend/core/usecases/usecase.dart';
-import 'package:frontend/features/auction/domain/repositories/i_auction_repository.dart';
+import 'package:frontend/features/auction/domain/repositories/auction_repository.dart';
 
 class PlaceBidUseCase implements UseCase<void, PlaceBidParams> {
-  final IAuctionRepository repository;
+  final AuctionRepository repository;
 
   PlaceBidUseCase(this.repository);
 

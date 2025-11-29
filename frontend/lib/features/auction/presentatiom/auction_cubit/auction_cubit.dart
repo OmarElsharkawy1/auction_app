@@ -30,37 +30,14 @@ class AuctionCubit extends Cubit<AuctionState> {
       connectAuctionUseCase(ConnectAuctionParams(token: token));
 
       _auctionSubscription?.cancel();
-      _auctionSubscription = getAuctionUpdatesUseCase().listen(
+      _auctionSubscription = getAuctionUpdatesUseCase(NoParams()).listen(
         (item) {
-          // Convert Entity to Map for State (or update State to use Entity)
-          // For now, let's keep State using Map to minimize refactor,
-          // BUT ideally State should use Entity.
-          // Let's update State to use Entity in next step or map it here.
-          // Mapping to Map for compatibility with existing UI code for now.
-          final itemMap = {
-            'id': item.id,
-            'title': item.title,
-            'description': item.description,
-            'imageUrl': item.imageUrl,
-            'currentPrice': item.currentPrice,
-            'highestBidder': item.highestBidder,
-            'bids': item.bids
-                .map(
-                  (b) => {
-                    'user': b.user,
-                    'amount': b.amount,
-                    'timestamp': b.timestamp.toString(),
-                  },
-                )
-                .toList(),
-          };
-
           double currentBidAmount = 0.0;
           if (state is AuctionLoaded) {
             currentBidAmount = (state as AuctionLoaded).bidAmount;
           }
 
-          emit(AuctionLoaded(itemMap, bidAmount: currentBidAmount));
+          emit(AuctionLoaded(item, bidAmount: currentBidAmount));
         },
         onError: (error) {
           emit(AuctionError('Connection error: $error'));

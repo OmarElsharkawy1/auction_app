@@ -1,12 +1,14 @@
+import '../../../../core/usecases/usecase.dart';
 import '../entities/auction_item.dart';
-import '../repositories/i_auction_repository.dart';
+import '../repositories/auction_repository.dart';
 
-class GetAuctionUpdatesUseCase {
-  final IAuctionRepository repository;
+class GetAuctionUpdatesUseCase implements StreamUseCase<AuctionItem, NoParams> {
+  final AuctionRepository repository;
 
   GetAuctionUpdatesUseCase(this.repository);
 
-  Stream<AuctionItem> call() {
+  @override
+  Stream<AuctionItem> call(NoParams params) {
     return repository.auctionUpdates;
   }
 }
