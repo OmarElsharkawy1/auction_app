@@ -68,31 +68,34 @@ class _AuctionScreenState extends State<AuctionScreen> {
             final item = state.item;
             final bids = item.bids;
 
-            return Column(
-              children: [
-                Expanded(
-                  child: CustomScrollView(
-                    controller: _scrollController,
-                    slivers: [
-                      AuctionAppBar(
-                        isCollapsed: _isCollapsed,
-                        item: item,
-                        onLogout: () {
-                          context.read<AuctionCubit>().disconnect();
-                          context.read<AuthCubit>().logout();
-                          context.go('/');
-                        },
-                      ),
-                      AuctionInfo(item: item),
-                      BidList(bids: bids),
-                      const SliverToBoxAdapter(
-                        child: SizedBox(height: 100),
-                      ), // Space for bottom bar
-                    ],
+            return SafeArea(
+              bottom: false,
+              child: Column(
+                children: [
+                  Expanded(
+                    child: CustomScrollView(
+                      controller: _scrollController,
+                      slivers: [
+                        AuctionAppBar(
+                          isCollapsed: _isCollapsed,
+                          item: item,
+                          onLogout: () {
+                            context.read<AuctionCubit>().disconnect();
+                            context.read<AuthCubit>().logout();
+                            context.go('/');
+                          },
+                        ),
+                        AuctionInfo(item: item),
+                        BidList(bids: bids),
+                        const SliverToBoxAdapter(
+                          child: SizedBox(height: 100),
+                        ), // Space for bottom bar
+                      ],
+                    ),
                   ),
-                ),
-                const BidInput(),
-              ],
+                  const BidInput(),
+                ],
+              ),
             );
           }
           return Container();
