@@ -1,3 +1,4 @@
+import 'package:frontend/config/router/app_routes.dart';
 import 'package:frontend/config/router/go_router_refresh_stream.dart';
 import 'package:frontend/core/services/injection_container.dart' as di;
 import 'package:frontend/features/auction/presentatiom/auction_screen.dart';
@@ -8,11 +9,14 @@ import 'package:go_router/go_router.dart';
 
 class AppRouter {
   static final router = GoRouter(
-    initialLocation: '/',
+    initialLocation: AppRoutes.auth,
     routes: [
-      GoRoute(path: '/', builder: (context, state) => const AuthScreen()),
       GoRoute(
-        path: '/auction',
+        path: AppRoutes.auth,
+        builder: (context, state) => const AuthScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.auction,
         builder: (context, state) => const AuctionScreen(),
       ),
     ],
@@ -20,10 +24,10 @@ class AppRouter {
       final authCubit = di.sl<AuthCubit>();
       final authState = authCubit.state;
       final loggedIn = authState is AuthAuthenticated;
-      final loggingIn = state.uri.toString() == '/';
+      final loggingIn = state.uri.toString() == AppRoutes.auth;
 
-      if (!loggedIn && !loggingIn) return '/';
-      if (loggedIn && loggingIn) return '/auction';
+      if (!loggedIn && !loggingIn) return AppRoutes.auth;
+      if (loggedIn && loggingIn) return AppRoutes.auction;
       return null;
     },
     refreshListenable: GoRouterRefreshStream(di.sl<AuthCubit>().stream),
