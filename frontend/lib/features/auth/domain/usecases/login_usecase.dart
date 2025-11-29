@@ -1,11 +1,11 @@
 import 'package:equatable/equatable.dart';
 import 'package:frontend/core/usecases/usecase.dart';
 import 'package:frontend/features/auth/domain/entities/user.dart';
-import 'package:frontend/features/auth/domain/repositories/i_auth_repository.dart';
+import 'package:frontend/features/auth/domain/repositories/auth_repository.dart';
 
 /// Use case for logging in a user.
 class LoginUseCase implements UseCase<User, LoginParams> {
-  final IAuthRepository repository;
+  final AuthRepository repository;
 
   LoginUseCase(this.repository);
 

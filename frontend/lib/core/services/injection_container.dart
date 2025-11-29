@@ -10,7 +10,7 @@ import 'package:frontend/features/auction/presentatiom/auction_cubit/auction_cub
 import 'package:frontend/features/auth/data/datasources/auth_local_data_source.dart';
 import 'package:frontend/features/auth/data/datasources/auth_remote_data_source.dart';
 import 'package:frontend/features/auth/data/repositories/auth_repository_impl.dart';
-import 'package:frontend/features/auth/domain/repositories/i_auth_repository.dart';
+import 'package:frontend/features/auth/domain/repositories/auth_repository.dart';
 import 'package:frontend/features/auth/domain/usecases/check_auth_usecase.dart';
 import 'package:frontend/features/auth/domain/usecases/login_usecase.dart';
 import 'package:frontend/features/auth/domain/usecases/logout_usecase.dart';
@@ -45,7 +45,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => CheckAuthUseCase(sl()));
 
   // Repository
-  sl.registerLazySingleton<IAuthRepository>(
+  sl.registerLazySingleton<AuthRepository>(
     () => AuthRepositoryImpl(remoteDataSource: sl(), localDataSource: sl()),
   );
 

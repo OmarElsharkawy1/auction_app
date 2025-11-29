@@ -1,7 +1,7 @@
 import 'package:frontend/features/auth/domain/entities/user.dart';
 
 /// Interface for the authentication repository.
-abstract class IAuthRepository {
+abstract class AuthRepository {
   /// Logs in a user with [email] and [password].
   Future<User> login(String email, String password);
 
