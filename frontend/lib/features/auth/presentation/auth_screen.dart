@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:frontend/features/auth/presentation/widgets/auth_form.dart';
+import 'package:frontend/features/auth/presentation/widgets/auth_header.dart';
+import 'package:frontend/features/auth/presentation/widgets/auth_switch.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/components/snackbar.dart';
@@ -59,104 +62,15 @@ class AuthScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    const Icon(
-                      Icons.gavel_rounded,
-                      size: 64,
-                      color: Color(0xFF2962FF),
-                    ),
-                    const SizedBox(height: 32),
-                    Text(
-                      isLogin ? 'Welcome Back' : 'Create Account',
-                      textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.headlineLarge
-                          ?.copyWith(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                          ),
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      isLogin
-                          ? 'Enter your credentials to access the auction.'
-                          : 'Sign up to start bidding on exclusive items.',
-                      textAlign: TextAlign.center,
-                      style: Theme.of(
-                        context,
-                      ).textTheme.bodyMedium?.copyWith(color: Colors.grey[600]),
-                    ),
+                    AuthHeader(isLogin: isLogin),
                     const SizedBox(height: 48),
-                    if (!isLogin) ...[
-                      TextFormField(
-                        key: const ValueKey('username'),
-                        initialValue: state.formData.username,
-                        decoration: const InputDecoration(
-                          labelText: 'Username',
-                          prefixIcon: Icon(Icons.person_outline),
-                        ),
-                        onChanged: (value) =>
-                            context.read<AuthCubit>().usernameChanged(value),
-                      ),
-                      const SizedBox(height: 20),
-                    ],
-                    TextFormField(
-                      key: const ValueKey('email'),
-                      initialValue: state.formData.email,
-                      decoration: const InputDecoration(
-                        labelText: 'Email',
-                        prefixIcon: Icon(Icons.email_outlined),
-                      ),
-                      onChanged: (value) =>
-                          context.read<AuthCubit>().emailChanged(value),
-                    ),
-                    const SizedBox(height: 20),
-                    TextFormField(
-                      key: const ValueKey('password'),
-                      initialValue: state.formData.password,
-                      decoration: const InputDecoration(
-                        labelText: 'Password',
-                        prefixIcon: Icon(Icons.lock_outline),
-                      ),
-                      obscureText: true,
-                      onChanged: (value) =>
-                          context.read<AuthCubit>().passwordChanged(value),
-                    ),
-                    const SizedBox(height: 32),
-                    if (state is AuthLoading)
-                      const Center(child: CircularProgressIndicator())
-                    else
-                      ElevatedButton(
-                        onPressed: () {
-                          context.read<AuthCubit>().submit();
-                        },
-                        style: ElevatedButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(vertical: 20),
-                          elevation: 0,
-                          shadowColor: Colors.transparent,
-                        ),
-                        child: Text(isLogin ? 'Login' : 'Register'),
-                      ),
+                    AuthForm(isLogin: isLogin, state: state),
                     const SizedBox(height: 24),
-                    TextButton(
-                      onPressed: () {
+                    AuthSwitch(
+                      isLogin: isLogin,
+                      onToggle: () {
                         context.read<AuthCubit>().toggleAuthMode();
                       },
-                      child: RichText(
-                        text: TextSpan(
-                          text: isLogin
-                              ? 'Don\'t have an account? '
-                              : 'Already have an account? ',
-                          style: TextStyle(color: Colors.grey[600]),
-                          children: [
-                            TextSpan(
-                              text: isLogin ? 'Sign Up' : 'Login',
-                              style: const TextStyle(
-                                color: Color(0xFF2962FF),
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
                     ),
                   ],
                 );
