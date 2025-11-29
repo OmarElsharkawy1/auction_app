@@ -91,5 +91,4 @@ Future<void> init() async {
   final sharedPreferences = await SharedPreferences.getInstance();
   sl.registerLazySingleton(() => sharedPreferences);
   sl.registerLazySingleton(() => http.Client());
-  // Socket.io client will be created in RemoteDataSource or injected here if singleton
 }
