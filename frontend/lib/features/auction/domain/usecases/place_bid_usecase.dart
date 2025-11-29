@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:frontend/core/usecases/usecase.dart';
 import 'package:frontend/features/auction/domain/repositories/auction_repository.dart';
 
+/// Use case for placing a bid on an auction item.
 class PlaceBidUseCase implements UseCase<void, PlaceBidParams> {
   final AuctionRepository repository;
 

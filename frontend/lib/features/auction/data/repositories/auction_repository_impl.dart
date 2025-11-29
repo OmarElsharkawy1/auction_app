@@ -2,6 +2,7 @@ import 'package:frontend/features/auction/data/datasources/auction_remote_data_s
 import 'package:frontend/features/auction/domain/entities/auction_item.dart';
 import 'package:frontend/features/auction/domain/repositories/auction_repository.dart';
 
+/// Implementation of [AuctionRepository] that uses a remote data source.
 class AuctionRepositoryImpl implements AuctionRepository {
   final AuctionRemoteDataSource remoteDataSource;
 

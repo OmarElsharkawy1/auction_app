@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 
+/// Holds the data for the authentication form.
 class AuthFormData extends Equatable {
   final String email;
   final String password;
@@ -31,6 +32,7 @@ class AuthFormData extends Equatable {
   List<Object?> get props => [email, password, username, isLogin];
 }
 
+/// Base class for the authentication state.
 abstract class AuthState extends Equatable {
   final AuthFormData formData;
 

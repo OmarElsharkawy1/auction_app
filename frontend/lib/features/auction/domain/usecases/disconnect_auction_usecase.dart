@@ -1,6 +1,7 @@
 import '../../../../core/usecases/usecase.dart';
 import '../repositories/auction_repository.dart';
 
+/// Use case for disconnecting from the auction.
 class DisconnectAuctionUseCase implements UseCase<void, NoParams> {
   final AuctionRepository repository;
 

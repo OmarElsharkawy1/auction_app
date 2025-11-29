@@ -4,7 +4,12 @@ import 'package:intl/intl.dart';
 
 import '../../domain/entities/auction_item.dart';
 
+/// Displays detailed information about the auction item.
+///
+/// This widget shows the current price, a "Live" indicator, the item's description,
+/// and a header for the recent bids section.
 class AuctionInfo extends StatelessWidget {
+  /// The auction item to display details for.
   final AuctionItem item;
 
   const AuctionInfo({super.key, required this.item});

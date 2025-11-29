@@ -3,7 +3,12 @@ import 'package:intl/intl.dart';
 
 import '../../domain/entities/auction_item.dart';
 
+/// A widget that displays a list of bids.
+///
+/// This widget renders a scrollable list of [Bid] items, showing the user's initial,
+/// name, timestamp, and bid amount.
 class BidList extends StatelessWidget {
+  /// The list of bids to display.
   final List<Bid> bids;
 
   const BidList({super.key, required this.bids});

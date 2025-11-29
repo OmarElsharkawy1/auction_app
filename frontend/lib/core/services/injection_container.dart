@@ -20,8 +20,12 @@ import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
+/// The service locator instance.
 final sl = GetIt.instance;
 
+/// Initializes the service locator and registers all dependencies.
+///
+/// This includes features (Auth, Auction), core services, and external dependencies.
 Future<void> init() async {
   //! Features - Auth
   // Cubit

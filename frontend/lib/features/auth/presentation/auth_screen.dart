@@ -11,6 +11,10 @@ import '../../../core/components/snackbar.dart';
 import 'auth_cubit/auth_cubit.dart';
 import 'auth_cubit/auth_state.dart';
 
+/// The authentication screen for login and registration.
+///
+/// Displays the [AuthHeader], [AuthForm], and [AuthSwitch] widgets.
+/// It also includes a language switcher in the app bar.
 class AuthScreen extends StatelessWidget {
   const AuthScreen({super.key});
 

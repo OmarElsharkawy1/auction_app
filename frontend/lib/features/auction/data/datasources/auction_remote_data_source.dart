@@ -5,10 +5,18 @@ import 'package:frontend/config.dart';
 import 'package:frontend/features/auction/data/models/auction_item_model.dart';
 import 'package:socket_io_client/socket_io_client.dart' as wio;
 
+/// Interface for remote auction operations.
 abstract class AuctionRemoteDataSource {
+  /// A stream of real-time auction updates.
   Stream<AuctionItemModel> get auctionUpdates;
+
+  /// Connects to the auction WebSocket with the given [token].
   void connect(String token);
+
+  /// Disconnects from the auction WebSocket.
   void disconnect();
+
+  /// Places a bid of [amount] with the given [token].
   void placeBid(double amount, String token);
 }
 

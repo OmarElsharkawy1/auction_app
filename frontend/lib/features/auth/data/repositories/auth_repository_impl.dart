@@ -3,6 +3,7 @@ import '../../domain/repositories/i_auth_repository.dart';
 import '../datasources/auth_local_data_source.dart';
 import '../datasources/auth_remote_data_source.dart';
 
+/// Implementation of [IAuthRepository] that uses remote and local data sources.
 class AuthRepositoryImpl implements IAuthRepository {
   final AuthRemoteDataSource remoteDataSource;
   final AuthLocalDataSource localDataSource;

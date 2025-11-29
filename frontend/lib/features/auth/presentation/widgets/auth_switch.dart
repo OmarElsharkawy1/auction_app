@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/core/utils/extensions.dart';
 
+/// A button to toggle between login and registration modes.
 class AuthSwitch extends StatelessWidget {
   final bool isLogin;
   final VoidCallback onToggle;

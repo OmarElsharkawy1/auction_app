@@ -9,6 +9,7 @@ import 'package:frontend/features/auth/domain/usecases/register_usecase.dart';
 
 import 'auth_state.dart';
 
+/// Manages the authentication state and business logic.
 class AuthCubit extends Cubit<AuthState> {
   final LoginUseCase loginUseCase;
   final RegisterUseCase registerUseCase;

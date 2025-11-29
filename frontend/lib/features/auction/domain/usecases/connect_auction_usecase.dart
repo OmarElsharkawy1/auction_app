@@ -3,6 +3,7 @@ import 'package:equatable/equatable.dart';
 import '../../../../core/usecases/usecase.dart';
 import '../repositories/auction_repository.dart';
 
+/// Use case for connecting to the auction.
 class ConnectAuctionUseCase implements UseCase<void, ConnectAuctionParams> {
   final AuctionRepository repository;
 

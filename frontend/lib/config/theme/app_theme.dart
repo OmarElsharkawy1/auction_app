@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
+/// Defines the application's theme and color palette.
 class AppTheme {
   static const _primaryColor = Color(0xFF2962FF); // Electric Blue
   static const _backgroundColor = Color(0xFFF5F5F7); // Off-White
   static const _surfaceColor = Colors.white;
   static const _textColor = Colors.black;
 
+  /// The light theme configuration for the application.
   static final lightTheme = ThemeData(
     useMaterial3: true,
     scaffoldBackgroundColor: _backgroundColor,

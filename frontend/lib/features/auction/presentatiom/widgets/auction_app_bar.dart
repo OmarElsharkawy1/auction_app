@@ -3,9 +3,18 @@ import 'package:frontend/core/components/language_switcher.dart';
 
 import '../../domain/entities/auction_item.dart';
 
+/// A custom app bar for the auction screen.
+///
+/// This app bar displays the auction item's image and title. It collapses as the user scrolls,
+/// changing its appearance to ensure visibility. It also includes a language switcher and a logout button.
 class AuctionAppBar extends StatelessWidget {
+  /// Whether the app bar is currently collapsed.
   final bool isCollapsed;
+
+  /// The auction item to display.
   final AuctionItem item;
+
+  /// Callback function to handle logout.
   final VoidCallback onLogout;
 
   const AuctionAppBar({

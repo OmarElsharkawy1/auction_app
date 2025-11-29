@@ -1,5 +1,8 @@
 import 'package:frontend/features/auction/domain/entities/auction_item.dart';
 
+/// A data model representing an auction item, extending [AuctionItem].
+///
+/// Includes methods for JSON serialization and deserialization.
 class AuctionItemModel extends AuctionItem {
   const AuctionItemModel({
     required super.id,
@@ -11,6 +14,7 @@ class AuctionItemModel extends AuctionItem {
     required List<BidModel> super.bids,
   });
 
+  /// Creates an [AuctionItemModel] from a JSON map.
   factory AuctionItemModel.fromJson(Map<String, dynamic> json) {
     return AuctionItemModel(
       id: json['id'],
@@ -24,6 +28,9 @@ class AuctionItemModel extends AuctionItem {
   }
 }
 
+/// A data model representing a bid, extending [Bid].
+///
+/// Includes methods for JSON serialization and deserialization.
 class BidModel extends Bid {
   const BidModel({
     required super.user,
@@ -31,6 +38,7 @@ class BidModel extends Bid {
     required super.timestamp,
   });
 
+  /// Creates a [BidModel] from a JSON map.
   factory BidModel.fromJson(Map<String, dynamic> json) {
     return BidModel(
       user: json['user'],

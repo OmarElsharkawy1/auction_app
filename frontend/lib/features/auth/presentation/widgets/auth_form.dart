@@ -4,6 +4,7 @@ import 'package:frontend/core/utils/extensions.dart';
 import 'package:frontend/features/auth/presentation/auth_cubit/auth_cubit.dart';
 import 'package:frontend/features/auth/presentation/auth_cubit/auth_state.dart';
 
+/// A form widget for user login and registration.
 class AuthForm extends StatelessWidget {
   final bool isLogin;
   final AuthState state;

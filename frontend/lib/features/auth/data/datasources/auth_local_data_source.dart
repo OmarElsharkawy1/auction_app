@@ -1,9 +1,15 @@
 import 'package:frontend/features/auth/data/models/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+/// Interface for local data storage of authentication information.
 abstract class AuthLocalDataSource {
+  /// Caches the [user] locally.
   Future<void> cacheUser(UserModel user);
+
+  /// Retrieves the last cached user, if any.
   Future<UserModel?> getLastUser();
+
+  /// Clears the cached user data.
   Future<void> clearUser();
 }
 

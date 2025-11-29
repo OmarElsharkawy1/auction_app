@@ -1,6 +1,7 @@
 import 'package:frontend/core/usecases/usecase.dart';
 import 'package:frontend/features/auth/domain/repositories/i_auth_repository.dart';
 
+/// Use case for logging out the current user.
 class LogoutUseCase implements UseCase<void, NoParams> {
   final IAuthRepository repository;
 

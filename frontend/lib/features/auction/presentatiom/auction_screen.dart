@@ -10,6 +10,10 @@ import 'package:frontend/features/auth/presentation/auth_cubit/auth_cubit.dart';
 import 'package:frontend/features/auth/presentation/auth_cubit/auth_state.dart';
 import 'package:go_router/go_router.dart';
 
+/// A screen that displays the details of an auction item and allows users to place bids.
+///
+/// This screen connects to the [AuctionCubit] to receive real-time updates about the auction.
+/// It displays the item's image, description, current price, and a list of recent bids.
 class AuctionScreen extends StatefulWidget {
   const AuctionScreen({super.key});
 

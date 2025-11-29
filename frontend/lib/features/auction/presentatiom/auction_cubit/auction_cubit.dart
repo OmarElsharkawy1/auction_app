@@ -9,6 +9,10 @@ import 'package:frontend/features/auction/domain/usecases/place_bid_usecase.dart
 
 import 'auction_state.dart';
 
+/// Manages the state of the auction and handles user interactions.
+///
+/// This cubit is responsible for connecting to the auction, handling real-time updates,
+/// placing bids, and disconnecting from the auction.
 class AuctionCubit extends Cubit<AuctionState> {
   final ConnectAuctionUseCase connectAuctionUseCase;
   final DisconnectAuctionUseCase disconnectAuctionUseCase;
@@ -24,6 +28,11 @@ class AuctionCubit extends Cubit<AuctionState> {
     required this.getAuctionUpdatesUseCase,
   }) : super(AuctionInitial());
 
+  /// Connects to the auction using the provided [token].
+  ///
+  /// This method initiates the connection and listens for real-time updates.
+  /// It emits [AuctionLoading] while connecting, and [AuctionLoaded] when data is received.
+  /// If an error occurs, it emits [AuctionError].
   void connect(String token) {
     emit(AuctionLoading());
     try {
@@ -48,12 +57,18 @@ class AuctionCubit extends Cubit<AuctionState> {
     }
   }
 
+  /// Disconnects from the current auction.
+  ///
+  /// This method cancels the subscription to auction updates and resets the state to [AuctionInitial].
   void disconnect() {
     _auctionSubscription?.cancel();
     disconnectAuctionUseCase(NoParams());
     emit(AuctionInitial());
   }
 
+  /// Updates the current bid amount in the state.
+  ///
+  /// This is called when the user types in the bid input field.
   void bidAmountChanged(String amountStr) {
     if (state is AuctionLoaded) {
       final amount = double.tryParse(amountStr) ?? 0.0;
@@ -61,6 +76,9 @@ class AuctionCubit extends Cubit<AuctionState> {
     }
   }
 
+  /// Places a bid with the current amount.
+  ///
+  /// This method calls the [PlaceBidUseCase] and resets the bid amount to 0.0 upon success.
   void placeBid(String token) {
     if (state is AuctionLoaded) {
       final amount = (state as AuctionLoaded).bidAmount;

@@ -7,7 +7,11 @@ import 'package:frontend/features/auth/presentation/auth_cubit/auth_state.dart';
 import 'package:frontend/features/auth/presentation/auth_screen.dart';
 import 'package:go_router/go_router.dart';
 
+/// Configures the application's router using GoRouter.
+///
+/// Defines the routes, redirect logic, and refresh listeners for authentication state changes.
 class AppRouter {
+  /// The GoRouter instance used for navigation.
   static final router = GoRouter(
     initialLocation: AppRoutes.auth,
     routes: [

@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:frontend/core/usecases/usecase.dart';
 import 'package:frontend/features/auth/domain/repositories/i_auth_repository.dart';
 
+/// Use case for registering a new user.
 class RegisterUseCase implements UseCase<void, RegisterParams> {
   final IAuthRepository repository;
 

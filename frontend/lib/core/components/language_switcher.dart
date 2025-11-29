@@ -3,7 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend/core/bloc/locale/locale_cubit.dart';
 import 'package:frontend/core/bloc/locale/locale_state.dart';
 
+/// A widget that allows the user to switch the application's language.
+///
+/// Displays a popup menu with available languages (English, Arabic, Spanish).
 class LanguageSwitcher extends StatelessWidget {
+  /// The color of the language icon.
   final Color? iconColor;
 
   const LanguageSwitcher({super.key, this.iconColor});

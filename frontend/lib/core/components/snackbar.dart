@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
+/// A utility class for showing custom SnackBars.
 class AppSnackBar {
+  /// Shows a success SnackBar with a green background and check icon.
   static void showSuccess(
     BuildContext context,
     String message, {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/core/utils/extensions.dart';
 
+/// Displays the header for the authentication screen, including the app logo and title.
 class AuthHeader extends StatelessWidget {
   final bool isLogin;
 

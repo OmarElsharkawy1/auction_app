@@ -12,6 +12,9 @@ import 'core/services/injection_container.dart' as di;
 import 'features/auction/presentatiom/auction_cubit/auction_cubit.dart';
 import 'features/auth/presentation/auth_cubit/auth_cubit.dart';
 
+/// The entry point of the application.
+///
+/// Initializes bindings, dependency injection, and runs the [MyApp] widget.
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await di.init();
@@ -21,6 +24,9 @@ void main() async {
   runApp(const MyApp());
 }
 
+/// The root widget of the application.
+///
+/// Sets up the [MultiBlocProvider], [MaterialApp], theme, router, and localization.
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
