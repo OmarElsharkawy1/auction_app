@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/core/utils/extensions.dart';
 
 class AuthHeader extends StatelessWidget {
   final bool isLogin;
@@ -12,7 +13,7 @@ class AuthHeader extends StatelessWidget {
         const Icon(Icons.gavel_rounded, size: 64, color: Color(0xFF2962FF)),
         const SizedBox(height: 32),
         Text(
-          isLogin ? 'Welcome Back' : 'Create Account',
+          isLogin ? context.l10n.welcomeBack : context.l10n.createAccount,
           textAlign: TextAlign.center,
           style: Theme.of(context).textTheme.headlineLarge?.copyWith(
             color: Colors.black,
@@ -21,9 +22,7 @@ class AuthHeader extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         Text(
-          isLogin
-              ? 'Enter your credentials to access the auction.'
-              : 'Sign up to start bidding on exclusive items.',
+          isLogin ? context.l10n.enterCredentials : context.l10n.signUpToStart,
           textAlign: TextAlign.center,
           style: Theme.of(
             context,

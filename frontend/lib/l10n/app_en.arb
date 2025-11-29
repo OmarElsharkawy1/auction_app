@@ -1,0 +1,22 @@
+{
+  "@@locale": "en",
+  "welcomeBack": "Welcome Back",
+  "createAccount": "Create Account",
+  "enterCredentials": "Enter your credentials to access the auction.",
+  "signUpToStart": "Sign up to start bidding on exclusive items.",
+  "username": "Username",
+  "email": "Email",
+  "password": "Password",
+  "login": "Login",
+  "register": "Register",
+  "dontHaveAccount": "Don't have an account? ",
+  "alreadyHaveAccount": "Already have an account? ",
+  "signUp": "Sign Up",
+  "registrationSuccessful": "Registration successful! Please log in.",
+  "currentPrice": "Current Price",
+  "live": "LIVE",
+  "description": "Description",
+  "recentBids": "Recent Bids",
+  "enterAmount": "Enter amount",
+  "placeBid": "Place Bid"
+}

@@ -14,7 +14,6 @@ class AppTheme {
       seedColor: _primaryColor,
       primary: _primaryColor,
       surface: _surfaceColor,
-      background: _backgroundColor,
     ),
     appBarTheme: const AppBarTheme(
       backgroundColor: _surfaceColor,
@@ -31,7 +30,7 @@ class AppTheme {
     cardTheme: CardThemeData(
       color: _surfaceColor,
       elevation: 4,
-      shadowColor: Colors.black.withOpacity(0.05),
+      shadowColor: Colors.black.withValues(alpha: 0.05),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
       margin: EdgeInsets.zero,
     ),

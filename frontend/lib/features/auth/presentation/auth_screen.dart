@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:frontend/core/components/language_switcher.dart';
+import 'package:frontend/core/utils/extensions.dart';
 import 'package:frontend/features/auth/presentation/widgets/auth_form.dart';
 import 'package:frontend/features/auth/presentation/widgets/auth_header.dart';
 import 'package:frontend/features/auth/presentation/widgets/auth_switch.dart';
@@ -26,7 +28,7 @@ class AuthScreen extends StatelessWidget {
           listener: (context, state) {
             AppSnackBar.showSuccess(
               context,
-              'Registration successful! Please log in.',
+              context.l10n.registrationSuccessful,
             );
           },
         ),
@@ -52,6 +54,11 @@ class AuthScreen extends StatelessWidget {
       ],
       child: Scaffold(
         backgroundColor: Colors.white,
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          actions: const [LanguageSwitcher(), SizedBox(width: 16)],
+        ),
         body: Center(
           child: SingleChildScrollView(
             padding: const EdgeInsets.all(32.0),

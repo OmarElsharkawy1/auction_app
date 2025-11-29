@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:frontend/core/utils/extensions.dart';
 import 'package:frontend/features/auction/presentatiom/auction_cubit/auction_cubit.dart';
 import 'package:frontend/features/auth/presentation/auth_cubit/auth_cubit.dart';
 import 'package:frontend/features/auth/presentation/auth_cubit/auth_state.dart';
@@ -28,7 +29,7 @@ class BidInput extends StatelessWidget {
               keyboardType: TextInputType.number,
               style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
               decoration: InputDecoration(
-                hintText: 'Enter amount',
+                hintText: context.l10n.enterAmount,
                 prefixText: '\$ ',
                 prefixStyle: const TextStyle(
                   fontWeight: FontWeight.bold,
@@ -60,7 +61,7 @@ class BidInput extends StatelessWidget {
                   borderRadius: BorderRadius.circular(16),
                 ),
               ),
-              child: const Text('Place Bid'),
+              child: Text(context.l10n.placeBid),
             ),
           ),
         ],

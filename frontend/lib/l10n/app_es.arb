@@ -1,0 +1,22 @@
+{
+  "@@locale": "es",
+  "welcomeBack": "Bienvenido de nuevo",
+  "createAccount": "Crear cuenta",
+  "enterCredentials": "Ingrese sus credenciales para acceder a la subasta.",
+  "signUpToStart": "Regístrese para comenzar a pujar por artículos exclusivos.",
+  "username": "Nombre de usuario",
+  "email": "Correo electrónico",
+  "password": "Contraseña",
+  "login": "Iniciar sesión",
+  "register": "Registrarse",
+  "dontHaveAccount": "¿No tienes una cuenta? ",
+  "alreadyHaveAccount": "¿Ya tienes una cuenta? ",
+  "signUp": "Regístrate",
+  "registrationSuccessful": "¡Registro exitoso! Por favor inicie sesión.",
+  "currentPrice": "Precio actual",
+  "live": "EN VIVO",
+  "description": "Descripción",
+  "recentBids": "Pujas recientes",
+  "enterAmount": "Ingrese cantidad",
+  "placeBid": "Hacer puja"
+}

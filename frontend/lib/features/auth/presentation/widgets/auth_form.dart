@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:frontend/core/utils/extensions.dart';
 import 'package:frontend/features/auth/presentation/auth_cubit/auth_cubit.dart';
 import 'package:frontend/features/auth/presentation/auth_cubit/auth_state.dart';
 
@@ -17,9 +18,9 @@ class AuthForm extends StatelessWidget {
           TextFormField(
             key: const ValueKey('username'),
             initialValue: state.formData.username,
-            decoration: const InputDecoration(
-              labelText: 'Username',
-              prefixIcon: Icon(Icons.person_outline),
+            decoration: InputDecoration(
+              labelText: context.l10n.username,
+              prefixIcon: const Icon(Icons.person_outline),
             ),
             onChanged: (value) =>
                 context.read<AuthCubit>().usernameChanged(value),
@@ -29,9 +30,9 @@ class AuthForm extends StatelessWidget {
         TextFormField(
           key: const ValueKey('email'),
           initialValue: state.formData.email,
-          decoration: const InputDecoration(
-            labelText: 'Email',
-            prefixIcon: Icon(Icons.email_outlined),
+          decoration: InputDecoration(
+            labelText: context.l10n.email,
+            prefixIcon: const Icon(Icons.email_outlined),
           ),
           onChanged: (value) => context.read<AuthCubit>().emailChanged(value),
         ),
@@ -39,9 +40,9 @@ class AuthForm extends StatelessWidget {
         TextFormField(
           key: const ValueKey('password'),
           initialValue: state.formData.password,
-          decoration: const InputDecoration(
-            labelText: 'Password',
-            prefixIcon: Icon(Icons.lock_outline),
+          decoration: InputDecoration(
+            labelText: context.l10n.password,
+            prefixIcon: const Icon(Icons.lock_outline),
           ),
           obscureText: true,
           onChanged: (value) =>
@@ -62,7 +63,7 @@ class AuthForm extends StatelessWidget {
                 elevation: 0,
                 shadowColor: Colors.transparent,
               ),
-              child: Text(isLogin ? 'Login' : 'Register'),
+              child: Text(isLogin ? context.l10n.login : context.l10n.register),
             ),
           ),
       ],

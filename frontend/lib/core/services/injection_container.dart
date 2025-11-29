@@ -1,3 +1,4 @@
+import 'package:frontend/core/bloc/locale/locale_cubit.dart';
 import 'package:frontend/features/auction/data/datasources/auction_remote_data_source.dart';
 import 'package:frontend/features/auction/data/repositories/auction_repository_impl.dart';
 import 'package:frontend/features/auction/domain/repositories/i_auction_repository.dart';
@@ -62,6 +63,7 @@ Future<void> init() async {
       getAuctionUpdatesUseCase: sl(),
     ),
   );
+  sl.registerFactory(() => LocaleCubit());
 
   // Use cases
   sl.registerLazySingleton(() => ConnectAuctionUseCase(sl()));

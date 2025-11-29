@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/core/components/language_switcher.dart';
 
 class AuctionAppBar extends StatelessWidget {
   final bool isCollapsed;
@@ -60,6 +61,7 @@ class AuctionAppBar extends StatelessWidget {
         ),
       ),
       actions: [
+        LanguageSwitcher(iconColor: isCollapsed ? Colors.black : Colors.white),
         IconButton(
           icon: Icon(
             Icons.logout,

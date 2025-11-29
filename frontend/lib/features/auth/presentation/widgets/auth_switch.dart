@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/core/utils/extensions.dart';
 
 class AuthSwitch extends StatelessWidget {
   final bool isLogin;
@@ -13,12 +14,12 @@ class AuthSwitch extends StatelessWidget {
       child: RichText(
         text: TextSpan(
           text: isLogin
-              ? 'Don\'t have an account? '
-              : 'Already have an account? ',
+              ? context.l10n.dontHaveAccount
+              : context.l10n.alreadyHaveAccount,
           style: TextStyle(color: Colors.grey[600]),
           children: [
             TextSpan(
-              text: isLogin ? 'Sign Up' : 'Login',
+              text: isLogin ? context.l10n.signUp : context.l10n.login,
               style: const TextStyle(
                 color: Color(0xFF2962FF),
                 fontWeight: FontWeight.bold,
