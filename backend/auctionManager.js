@@ -3,7 +3,7 @@ const auctionState = {
         id: 1,
         title: "Vintage Camera",
         description: "A rare 1950s film camera in excellent condition.",
-        imageUrl: "https://as1.ftcdn.net/jpg/00/49/35/90/1000_F_49359078_a2cZAgGXvtcphEgqIbY5TtfhNCFlNhOo.webp",
+        imageUrl: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
         currentPrice: 100.00,
         highestBidder: null, // { username: "..." }
         bids: [] // History of bids

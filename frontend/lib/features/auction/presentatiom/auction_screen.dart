@@ -157,7 +157,7 @@ class _AuctionScreenState extends State<AuctionScreen> {
                                       vertical: 6,
                                     ),
                                     decoration: BoxDecoration(
-                                      color: Colors.red.withOpacity(0.1),
+                                      color: Colors.red.withValues(alpha: 0.1),
                                       borderRadius: BorderRadius.circular(20),
                                     ),
                                     child: const Row(
@@ -226,7 +226,7 @@ class _AuctionScreenState extends State<AuctionScreen> {
                                 leading: CircleAvatar(
                                   backgroundColor: Theme.of(
                                     context,
-                                  ).primaryColor.withOpacity(0.1),
+                                  ).primaryColor.withValues(alpha: 0.1),
                                   child: Text(
                                     bid['user'][0].toUpperCase(),
                                     style: TextStyle(
@@ -271,7 +271,7 @@ class _AuctionScreenState extends State<AuctionScreen> {
                     color: Colors.white,
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.05),
+                        color: Colors.black.withValues(alpha: 0.05),
                         blurRadius: 20,
                         offset: const Offset(0, -5),
                       ),
