@@ -4,9 +4,10 @@ A real-time auction application that allows users to place bids instantly on ite
 
 ## Screenshots
 
-| Login Screen | Auction Screen |
-|:---:|:---:|
-| ![Login Screen](docs/screenshots/login_placeholder.png) | ![Auction Screen](docs/screenshots/auction_placeholder.png) |
+| SignUp Screen | Login Screen | Auction Screen |
+|:---:|:---:|:---:|
+| <img width="220" height="956" alt="Simulator Screenshot - iPhone 16 Pro Max - 2025-11-29 at 15 24 01" src="https://github.com/user-attachments/assets/d9c90fe8-7e12-4bf1-9912-f33d43ecdcc6" /> | <img width="220" height="956" alt="Simulator Screenshot - iPhone 16 Pro Max - 2025-11-29 at 15 17 51" src="https://github.com/user-attachments/assets/8adfe1cd-58d1-4312-8420-80030b1b144a" /> | <img width="220" height="956" alt="Simulator Screenshot - iPhone 16 Pro Max - 2025-11-29 at 15 17 46" src="https://github.com/user-attachments/assets/c3a8c85b-b8eb-4098-a1b5-a7c03472d424" /> |
+
 
 ## Features
 
