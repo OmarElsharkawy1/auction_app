@@ -95,3 +95,34 @@ The frontend follows Clean Architecture principles:
     *   **`data`**: Data sources, models, and repository implementations.
     *   **`domain`**: Entities, repository interfaces, and use cases.
     *   **`presentation`**: BLoCs, screens, and widgets.
+
+## Testing
+
+The project includes a comprehensive suite of tests to ensure reliability and correctness.
+
+### Unit Tests
+Focus on testing individual components in isolation, including:
+*   **Domain Layer**: Use cases are tested to verify business logic.
+*   **Data Layer**: Models (JSON serialization) and Repositories (mocking data sources) are tested.
+*   **Presentation Layer**: Cubits are tested using `bloc_test` to verify state changes.
+
+### Widget Tests
+Verify that UI components render correctly and interact as expected.
+*   **Screens**: `AuthScreen` and `AuctionScreen` are tested for correct rendering and localization.
+*   **Widgets**: Individual widgets are tested in isolation.
+
+### Integration Tests
+Test the complete app flow from start to finish.
+*   **App Flow**: Verifies the user journey from login to placing a bid.
+
+### Running Tests
+
+To run all tests:
+```bash
+flutter test
+```
+
+To run integration tests:
+```bash
+flutter test integration_test/app_test.dart
+```
