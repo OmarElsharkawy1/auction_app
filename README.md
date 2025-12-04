@@ -111,18 +111,9 @@ Verify that UI components render correctly and interact as expected.
 *   **Screens**: `AuthScreen` and `AuctionScreen` are tested for correct rendering and localization.
 *   **Widgets**: Individual widgets are tested in isolation.
 
-### Integration Tests
-Test the complete app flow from start to finish.
-*   **App Flow**: Verifies the user journey from login to placing a bid.
-
 ### Running Tests
 
 To run all tests:
 ```bash
 flutter test
-```
-
-To run integration tests:
-```bash
-flutter test integration_test/app_test.dart
 ```
