@@ -74,7 +74,11 @@ Follow these steps to set up the project locally.
 
 3.  Run the application:
     ```bash
-    flutter run
+    flutter run 
+    ```
+    Run the application on web:
+    ```bash
+    flutter run -d chrome
     ```
 
 ## Environment Variables
