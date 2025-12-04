@@ -9,7 +9,6 @@ import 'core/bloc/locale/locale_cubit.dart';
 import 'core/bloc/locale/locale_state.dart';
 import 'core/observers/simple_bloc_observer.dart';
 import 'core/services/injection_container.dart' as di;
-import 'features/auction/presentatiom/auction_cubit/auction_cubit.dart';
 import 'features/auth/presentation/auth_cubit/auth_cubit.dart';
 
 /// The entry point of the application.
@@ -35,7 +34,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider.value(value: di.sl<AuthCubit>()),
-        BlocProvider(create: (_) => di.sl<AuctionCubit>()),
+
         BlocProvider(create: (_) => di.sl<LocaleCubit>()),
       ],
       child: BlocBuilder<LocaleCubit, LocaleState>(

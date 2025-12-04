@@ -6,8 +6,8 @@ import 'package:frontend/features/auction/domain/usecases/connect_auction_usecas
 import 'package:frontend/features/auction/domain/usecases/disconnect_auction_usecase.dart';
 import 'package:frontend/features/auction/domain/usecases/get_auction_updates_usecase.dart';
 import 'package:frontend/features/auction/domain/usecases/place_bid_usecase.dart';
-import 'package:frontend/features/auction/presentatiom/auction_cubit/auction_cubit.dart';
-import 'package:frontend/features/auction/presentatiom/auction_cubit/auction_state.dart';
+import 'package:frontend/features/auction/presentation/auction_cubit/auction_cubit.dart';
+import 'package:frontend/features/auction/presentation/auction_cubit/auction_state.dart';
 import 'package:mocktail/mocktail.dart';
 
 /// Mock for [ConnectAuctionUseCase].

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend/core/utils/extensions.dart';
-import 'package:frontend/features/auction/presentatiom/auction_cubit/auction_cubit.dart';
+import 'package:frontend/features/auction/presentation/auction_cubit/auction_cubit.dart';
 import 'package:frontend/features/auth/presentation/auth_cubit/auth_cubit.dart';
 import 'package:frontend/features/auth/presentation/auth_cubit/auth_state.dart';
 

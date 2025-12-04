@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:frontend/features/auction/presentatiom/auction_cubit/auction_cubit.dart';
-import 'package:frontend/features/auction/presentatiom/auction_cubit/auction_state.dart';
-import 'package:frontend/features/auction/presentatiom/widgets/auction_app_bar.dart';
-import 'package:frontend/features/auction/presentatiom/widgets/auction_info.dart';
-import 'package:frontend/features/auction/presentatiom/widgets/bid_input.dart';
-import 'package:frontend/features/auction/presentatiom/widgets/bid_list.dart';
+import 'package:frontend/features/auction/presentation/auction_cubit/auction_cubit.dart';
+import 'package:frontend/features/auction/presentation/auction_cubit/auction_state.dart';
+import 'package:frontend/features/auction/presentation/widgets/auction_app_bar.dart';
+import 'package:frontend/features/auction/presentation/widgets/auction_info.dart';
+import 'package:frontend/features/auction/presentation/widgets/bid_input.dart';
+import 'package:frontend/features/auction/presentation/widgets/bid_list.dart';
 import 'package:frontend/features/auth/presentation/auth_cubit/auth_cubit.dart';
 import 'package:frontend/features/auth/presentation/auth_cubit/auth_state.dart';
 import 'package:go_router/go_router.dart';

@@ -1,7 +1,9 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend/config/router/app_routes.dart';
 import 'package:frontend/config/router/go_router_refresh_stream.dart';
 import 'package:frontend/core/services/injection_container.dart' as di;
-import 'package:frontend/features/auction/presentatiom/auction_screen.dart';
+import 'package:frontend/features/auction/presentation/auction_cubit/auction_cubit.dart';
+import 'package:frontend/features/auction/presentation/auction_screen.dart';
 import 'package:frontend/features/auth/presentation/auth_cubit/auth_cubit.dart';
 import 'package:frontend/features/auth/presentation/auth_cubit/auth_state.dart';
 import 'package:frontend/features/auth/presentation/auth_screen.dart';
@@ -21,7 +23,10 @@ class AppRouter {
       ),
       GoRoute(
         path: AppRoutes.auction,
-        builder: (context, state) => const AuctionScreen(),
+        builder: (context, state) => BlocProvider(
+          create: (context) => di.sl<AuctionCubit>(),
+          child: const AuctionScreen(),
+        ),
       ),
     ],
     redirect: (context, state) {

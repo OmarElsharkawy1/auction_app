@@ -6,7 +6,7 @@ import 'package:frontend/features/auction/domain/usecases/connect_auction_usecas
 import 'package:frontend/features/auction/domain/usecases/disconnect_auction_usecase.dart';
 import 'package:frontend/features/auction/domain/usecases/get_auction_updates_usecase.dart';
 import 'package:frontend/features/auction/domain/usecases/place_bid_usecase.dart';
-import 'package:frontend/features/auction/presentatiom/auction_cubit/auction_cubit.dart';
+import 'package:frontend/features/auction/presentation/auction_cubit/auction_cubit.dart';
 import 'package:frontend/features/auth/data/datasources/auth_local_data_source.dart';
 import 'package:frontend/features/auth/data/datasources/auth_remote_data_source.dart';
 import 'package:frontend/features/auth/data/repositories/auth_repository_impl.dart';
